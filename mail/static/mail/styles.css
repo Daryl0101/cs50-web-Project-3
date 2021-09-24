@@ -22,6 +22,10 @@ textarea {
     grid-template-columns: 1fr 5fr;
 }
 
+.mail-unread:hover, .mail-read:hover {
+    cursor: pointer;
+}
+
 .mail-sender {
     font-family: 'Geneva', sans-serif;
     font-size: 15px;
@@ -37,7 +41,7 @@ textarea {
     padding: 0 20px;
 }
 
-.mail-time {
+.mail-time, #clickedMail-time {
     font-family: 'Geneva', sans-serif;
     font-size: 10px;
     color: rgb(167, 164, 164);
