@@ -1,3 +1,44 @@
 textarea {
     min-height: 400px;
 }
+
+.mail-unread {
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: white;
+    margin: 10px 0;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+
+.mail-read {
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: #eee;
+    margin: 10px 0;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+
+.mail-sender {
+    font-family: 'Geneva', sans-serif;
+    font-size: 15px;
+}
+
+.mail-content {
+    display: grid;
+    grid-template-rows: 5fr 1fr;
+}
+
+.mail-subNbody {
+    font-family: 'Times New Roman', serif;
+    padding: 0 20px;
+}
+
+.mail-time {
+    font-family: 'Geneva', sans-serif;
+    font-size: 10px;
+    color: rgb(167, 164, 164);
+}
