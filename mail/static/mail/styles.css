@@ -46,3 +46,18 @@ textarea {
     font-size: 10px;
     color: rgb(167, 164, 164);
 }
+
+#clickedMail-container {
+    display: grid;
+    grid-template-columns: 100px 5fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+#clickedMail-topWrapper {
+    display: grid;
+    grid-template-columns: 5fr 100px 100px;
+}
+
+#reply, #archive {
+    justify-self: center;
+}
