@@ -1,6 +1,5 @@
 // When back arrow is clicked, show previous section
 window.onpopstate = function(event) {
-  console.log(typeof event.state.section);
   if(typeof event.state.section === 'string'){
     if(event.state.section!='compose') {
       load_mailbox(event.state.section);
@@ -19,19 +18,19 @@ document.addEventListener('DOMContentLoaded', function() {
   // Use buttons to toggle between views
   document.querySelector('#inbox').addEventListener('click', () => {
     load_mailbox('inbox');
-    history.pushState({section: 'inbox'}, "", "");
+    history.pushState({section: 'inbox'}, "", "inbox");
   });
   document.querySelector('#sent').addEventListener('click', () => {
     load_mailbox('sent');
-    history.pushState({section: 'sent'}, "", "");
+    history.pushState({section: 'sent'}, "", "sent");
   });
   document.querySelector('#archived').addEventListener('click', () => {
     load_mailbox('archive');
-    history.pushState({section: 'archive'}, "", "");
+    history.pushState({section: 'archive'}, "", "archive");
   });
   document.querySelector('#compose').addEventListener('click', () => {
     compose_email();
-    history.pushState({section: 'compose'}, "", "");
+    history.pushState({section: 'compose'}, "", "compose");
   });
 
   // By default, load the inbox
@@ -50,7 +49,6 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .then(response => response.json())
     .then(result => {
-      console.log(result);
       if(result.error) {
         compose_email();
         alert(`${result.error}`);
@@ -76,6 +74,7 @@ function compose_email() {
   document.querySelector('#compose-recipients').value = '';
   document.querySelector('#compose-subject').value = '';
   document.querySelector('#compose-body').value = '';
+  document.querySelector('#compose-recipients').disabled = false;
 }
 
 function load_mailbox(mailbox) {
@@ -97,7 +96,6 @@ function load_mailbox(mailbox) {
   fetch(`/emails/${mailbox}`)
   .then(response => response.json())
   .then(emails => {
-    console.log(emails);
     emails.forEach(add_email);
   });
 }
@@ -122,9 +120,8 @@ function add_email(mail) {
   </div>
   <div class="mail-subNbody"><b>${mail.subject}</b> - ${mail.body}</div>`;
   item.addEventListener('click', function(){
-    console.log('This element has been clicked!');
     load_clickedMail(mail.id);
-    history.pushState({section: mail.id}, "", "");
+    history.pushState({section: mail.id}, "", `email${mail.id}`);
     fetch(`/emails/${mail.id}`, {
       method: 'PUT',
       body: JSON.stringify({
@@ -141,7 +138,6 @@ function load_clickedMail(id) {
   fetch(`/emails/${id}`)
   .then(response => response.json())
   .then(mail => {
-    console.log(mail);
     // Show the mailbox and hide other views
     document.querySelector('#emails-view').style.display = 'none';
     document.querySelector('#mails-list').style.display = 'none';

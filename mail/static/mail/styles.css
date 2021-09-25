@@ -37,8 +37,10 @@ textarea {
 }
 
 .mail-subNbody {
+    max-height: 100px;
     font-family: 'Times New Roman', serif;
     padding: 0 20px;
+    overflow-y: hidden;
 }
 
 .mail-time, #clickedMail-time {
